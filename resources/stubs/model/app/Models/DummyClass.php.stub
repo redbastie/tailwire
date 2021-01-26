@@ -1,0 +1,24 @@
+<?php
+
+namespace DummyModelNamespace;
+
+use Faker\Generator;
+use Illuminate\Database\Schema\Blueprint;
+use Redbastie\Tailwire\Model;
+
+class DummyClass extends Model
+{
+    public function migration(Blueprint $table)
+    {
+        $table->id();
+        $table->string('name');
+        $table->timestamps();
+    }
+
+    public function definition(Generator $faker)
+    {
+        return [
+            'name' => $faker->name,
+        ];
+    }
+}

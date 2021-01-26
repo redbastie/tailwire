@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Components\Layouts;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Redbastie\Tailwire\Component;
+use Redbastie\Tailwire\View;
+
+class App extends Component
+{
+    public function view(View $v)
+    {
+        return $v->body(
+            $v->div(
+                $v->pullDownRefresh(
+                    $v->icon('refresh')->class('animate-spin text-gray-400 w-5 h-5 mx-auto')
+                )->class('mb-4'),
+
+                $v->header(
+                    $v->a(
+                        $v->img()->src(asset('images/fav-icon.png'))->class('w-5 h-5'),
+                        $v->span(config('app.name'))->class('text-xl text-black')
+                    )->href(route('index'))->class('flex items-center text-blue-600 hover:text-blue-800 space-x-1'),
+
+                    $v->if(Route::has('login'),
+                        fn() => $v->if(Auth::guest(),
+                            fn() => $v->nav(
+                                $v->a('Login')->href(route('login'))->class('text-blue-600 hover:text-blue-800'),
+                                $v->a('Register')->href(route('register'))->class('text-blue-600 hover:text-blue-800')
+                            )->class('flex space-x-4')
+                        )->else(
+                            fn() => $v->nav(
+                                $v->a('Home')->href(route('home'))->class('text-blue-600 hover:text-blue-800'),
+                                $v->a('Logout')->href(route('logout'))->class('text-blue-600 hover:text-blue-800')
+                            )->class('flex space-x-4')
+                        )
+                    )
+                )->class('container flex items-center justify-between max-w-screen-md mx-auto mb-4'),
+
+                $v->main(
+                    $v->yield()
+                )->class('container flex-grow max-w-screen-md mx-auto mb-4'),
+
+                $v->footer(
+                    '©' . date('Y') . ' ',
+                    $v->a(config('app.name'))->href(route('index'))
+                )->class('text-center text-xs text-gray-600')
+            )->class('flex flex-col min-h-screen p-4')
+        )->class('bg-gray-100');
+    }
+}

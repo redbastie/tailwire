@@ -1,0 +1,100 @@
+<?php
+
+namespace App\Components\User;
+
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Redbastie\Tailwire\Component;
+use Redbastie\Tailwire\View;
+
+class Save extends Component
+{
+    public $user;
+    public $show = false;
+    protected $listeners = ['show'];
+
+    public function view(View $v)
+    {
+        return $v->if($this->show,
+            fn() => $v->section(
+                $v->form(
+                    $v->div(
+                        $v->h1($this->viewTitle)->class('text-xl'),
+                        $v->button($v->icon('x'))->wireClick('hide')->class('text-gray-400 hover:text-gray-600 w-5 h-5')
+                    )->class('flex items-center justify-between px-6 py-4'),
+
+                    $v->div(
+                        $v->div(
+                            $v->label('Name')->for('name'),
+                            $v->input()->id('name')->wireModelDefer('name')
+                                ->class(($this->error('name') ? 'border-red-500' : 'border-gray-300') . ' rounded-md shadow-sm w-full'),
+                            $v->if($this->error('name'), fn() => $v->p($this->error('name'))->class('text-xs text-red-600'))
+                        )->class('space-y-1'),
+
+                        $v->div(
+                            $v->label('Email')->for('email'),
+                            $v->input()->type('email')->id('email')->wireModelDefer('email')
+                                ->class(($this->error('email') ? 'border-red-500' : 'border-gray-300') . ' rounded-md shadow-sm w-full'),
+                            $v->if($this->error('email'), fn() => $v->p($this->error('email'))->class('text-xs text-red-600'))
+                        )->class('space-y-1'),
+
+                        $v->div(
+                            $v->label($this->user->exists? 'New Password' : 'Password')->for('password'),
+                            $v->input()->type('password')->id('password')->wireModelDefer('password')
+                                ->class(($this->error('password') ? 'border-red-500' : 'border-gray-300') . ' rounded-md shadow-sm w-full'),
+                            $v->if($this->error('password'), fn() => $v->p($this->error('password'))->class('text-xs text-red-600'))
+                        )->class('space-y-1'),
+
+                        $v->div(
+                            $v->label($this->user->exists? 'Confirm New Password' : 'Confirm Password')->for('password_confirmation'),
+                            $v->input()->type('password')->id('password_confirmation')->wireModelDefer('password_confirmation')
+                                ->class('border-gray-300 rounded-md shadow-sm w-full'),
+                        )->class('space-y-1'),
+                    )->class('space-y-4 p-6'),
+
+                    $v->div(
+                        $v->button('Cancel')->wireClick('hide')->class('text-white bg-gray-500 hover:bg-gray-600 rounded-md shadow-sm px-4 py-2'),
+                        $v->button('Save')->type('submit')->class('text-white bg-blue-600 hover:bg-blue-700 rounded-md shadow-sm px-4 py-2')
+                    )->class('flex justify-end space-x-4 px-6 py-4'),
+                )->wireSubmitPrevent('save')->class('container bg-white rounded-lg shadow divide-y max-w-screen-sm mx-auto')
+            )->class('fixed inset-0 w-screen h-screen bg-black bg-opacity-50 overflow-y-auto p-4')
+        );
+    }
+
+    public function save()
+    {
+        $validated = $this->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email', 'unique:users,email,' . $this->user->id],
+            'password' => [$this->user->exists ? 'nullable' : 'required', 'confirmed'],
+        ]);
+
+        if (isset($validated['password'])) {
+            $validated['password'] = Hash::make($validated['password']);
+        }
+
+        if ($this->user->exists) {
+            $this->user->update($validated);
+        } else {
+            User::query()->create($validated);
+        }
+
+        $this->emitUp('$refresh');
+        $this->hide();
+    }
+
+    public function show(User $user = null)
+    {
+        $this->viewTitle = $user->exists ? 'Update User' : 'Create User';
+        $this->model = $user->toArray();
+        $this->user = $user;
+        $this->show = true;
+        $this->bodyScrollLock();
+    }
+
+    public function hide()
+    {
+        $this->show = false;
+        $this->bodyScrollUnlock();
+    }
+}

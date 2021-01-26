@@ -1,0 +1,37 @@
+{
+    "name": "redbastie/tailwire",
+    "homepage": "https://github.com/redbastie/tailwire",
+    "description": "Build web apps without having to write HTML, CSS, or JavaScript! Powered by Laravel Livewire and Tailwind.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Dion",
+            "email": "redbastie@icloud.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "barryvdh/laravel-ide-helper": "^2.0",
+        "blade-ui-kit/blade-heroicons": "^0.3",
+        "doctrine/dbal": "^3.0",
+        "google/recaptcha": "^1.2",
+        "jamesmills/laravel-timezone": "^1.9",
+        "laravel/framework": "^8.0",
+        "livewire/livewire": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Redbastie\\Tailwire\\": "src"
+        },
+        "files": [
+            "src/Helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Redbastie\\Tailwire\\Providers\\TailwireServiceProvider"
+            ]
+        }
+    }
+}

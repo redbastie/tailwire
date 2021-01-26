@@ -1,0 +1,1 @@
+<{{ $tag }} {{ $attributes->merge() }}>

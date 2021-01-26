@@ -1,0 +1,76 @@
+<?php
+
+namespace DummyComponentNamespace\DummyClass;
+
+use DummyModelNamespace\DummyClass;
+use Redbastie\Tailwire\Component;
+use Redbastie\Tailwire\View;
+
+class Index extends Component
+{
+    public $routeUri = 'DummyRouteUri';
+    public $routeName = 'DummyRouteName';
+    public $routeMiddleware = 'auth';
+    public $viewTitle = 'DummyTitles';
+    public $viewExtends = 'layouts.app';
+
+    public function view(View $v)
+    {
+        return $v->section(
+            $v->h1($this->viewTitle)->class('text-2xl mb-2'),
+
+            $v->div(
+                $v->input()->type('search')->placeholder('Search DummyTitles')->wireModelDebounce('search')
+                    ->class('placeholder-gray-400 border-gray-300 rounded-md shadow-sm w-44 md:w-60'),
+                $v->button('Create', $v->span(' DummyTitle')->class('hidden md:inline'))->wireClick('$emitTo', 'DummyRouteName.save', 'show')
+                    ->class('text-white bg-blue-600 hover:bg-blue-700 rounded-md shadow-sm px-4 py-2')
+            )->class('flex items-center justify-between mb-4'),
+
+            $v->div(
+                $v->each($this->query()->paginate($this->perPage),
+                    fn(DummyClass $dummyVariable) => $v->div(
+                        $v->ul(
+                            $v->li($dummyVariable->name),
+                            $v->li(timezone($dummyVariable->created_at))->class('text-xs text-gray-600')
+                        ),
+                        $v->nav(
+                            $v->button($v->icon('eye'))->wireClick('$emitTo', 'DummyRouteName.read', 'show', $dummyVariable->id)
+                                ->class('text-gray-400 hover:text-gray-600 w-5 h-5'),
+                            $v->button($v->icon('pencil-alt'))->wireClick('$emitTo', 'DummyRouteName.save', 'show', $dummyVariable->id)
+                                ->class('text-gray-400 hover:text-gray-600 w-5 h-5'),
+                            $v->button($v->icon('trash'))->wireClick('delete', $dummyVariable->id)->confirm('Delete this DummyTitle?')
+                                ->class('text-gray-400 hover:text-gray-600 w-5 h-5')
+                        )->class('flex space-x-3')
+                    )->class('flex items-center justify-between bg-white hover:bg-gray-50 px-6 py-4')
+                )->empty(
+                    fn() => $v->p('No DummyTitles found.')->class('bg-white px-6 py-4')
+                )
+            )->class('rounded-lg shadow divide-y overflow-hidden'),
+
+            $v->if($this->query()->count() > $this->perPage,
+                fn() => $v->infiniteScroll(
+                    $v->icon('refresh')->class('animate-spin text-gray-400 w-5 h-5 mx-auto')
+                )->class('mt-4')
+            ),
+
+            $v->include('DummyRouteName.read'),
+            $v->include('DummyRouteName.save'),
+        );
+    }
+
+    public function query()
+    {
+        $query = DummyClass::query();
+
+        if ($this->model('search')) {
+            $query->where('name', 'like', '%' . $this->model('search') . '%');
+        }
+
+        return $query->orderBy('name');
+    }
+
+    public function delete(DummyClass $dummyVariable)
+    {
+        $dummyVariable->delete();
+    }
+}

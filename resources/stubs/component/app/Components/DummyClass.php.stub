@@ -1,0 +1,14 @@
+<?php
+
+namespace DummyNamespace;
+
+use Redbastie\Tailwire\Component;
+use Redbastie\Tailwire\View;
+
+class DummyClass extends Component
+{
+    public function view(View $v)
+    {
+        return $v->p("DummyWisdomOfTheTao");
+    }
+}

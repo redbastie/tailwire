@@ -1,0 +1,22 @@
+<?php
+
+namespace DummyNamespace;
+
+use Redbastie\Tailwire\Component;
+use Redbastie\Tailwire\View;
+
+class DummyClass extends Component
+{
+    public $routeUri = 'DummyRouteUri';
+    public $routeName = 'DummyRouteName';
+    public $viewTitle = 'DummyViewTitle';
+    public $viewExtends = 'layouts.app';
+
+    public function view(View $v)
+    {
+        return $v->section(
+            $v->h1($this->viewTitle)->class('text-xl p-4'),
+            $v->p("DummyWisdomOfTheTao")->class('p-4')
+        )->class('border divide-y md:w-1/2 mx-auto');
+    }
+}

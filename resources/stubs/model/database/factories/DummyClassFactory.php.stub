@@ -1,0 +1,16 @@
+<?php
+
+namespace DummyFactoryNamespace;
+
+use DummyModelNamespace\DummyClass;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class DummyClassFactory extends Factory
+{
+    protected $model = DummyClass::class;
+
+    public function definition()
+    {
+        return app($this->model)->definition($this->faker);
+    }
+}
