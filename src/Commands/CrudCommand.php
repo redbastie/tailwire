@@ -15,7 +15,7 @@ class CrudCommand extends Command
 
     public function handle()
     {
-        Artisan::call('tailwire:model ' . $this->argument('class'));
+        Artisan::call('tailwire:model ' . $this->argument('class'), [], $this->getOutput());
 
         $componentParser = new ComponentParser('App\\Components', resource_path('views'), $this->argument('class'));
         $modelParser = new ComponentParser('App\\Models', resource_path('views'), $this->argument('class'));

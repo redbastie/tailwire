@@ -7,7 +7,7 @@ use Redbastie\Tailwire\View;
 
 class DummyClass extends Component
 {
-    public $routeUri = 'DummyRouteUri';
+    public $routeUri = '/DummyRouteUri';
     public $routeName = 'DummyRouteName';
     public $viewTitle = 'DummyViewTitle';
     public $viewExtends = 'layouts.app';

@@ -8,7 +8,7 @@ use Redbastie\Tailwire\View;
 
 class Index extends Component
 {
-    public $routeUri = 'user';
+    public $routeUri = '/user';
     public $routeName = 'user';
     public $routeMiddleware = 'auth';
     public $viewTitle = 'Users';

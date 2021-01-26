@@ -17,7 +17,7 @@ class AuthCommand extends Command
     {
         $this->createFiles('auth');
 
-        Artisan::call('tailwire:migrate');
+        Artisan::call('tailwire:migrate', [], $this->getOutput());
 
         User::query()->updateOrCreate(
             ['email' => 'user@example.com'],

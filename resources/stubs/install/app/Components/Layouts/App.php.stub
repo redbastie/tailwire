@@ -32,6 +32,9 @@ class App extends Component
                         )->else(
                             fn() => $v->nav(
                                 $v->a('Home')->href(route('home'))->class('text-blue-600 hover:text-blue-800'),
+                                $v->if(Route::has('user'),
+                                    fn() => $v->a('Users')->href(route('user'))->class('text-blue-600 hover:text-blue-800')
+                                ),
                                 $v->a('Logout')->href(route('logout'))->class('text-blue-600 hover:text-blue-800')
                             )->class('flex space-x-4')
                         )
