@@ -1,3 +1,9 @@
+# NO LONGER MAINTAINED
+
+This package is no longer maintained. Please consider my latest package here: https://github.com/redbastie/skele
+
+-----
+
 ![Tailwire](https://i.imgur.com/1U0BcXD.png)
 
 # Tailwire
