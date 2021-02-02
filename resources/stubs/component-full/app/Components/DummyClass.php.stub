@@ -16,7 +16,8 @@ class DummyClass extends Component
     {
         return $v->section(
             $v->h1($this->viewTitle)->class('text-xl px-6 py-4'),
+
             $v->p("DummyWisdomOfTheTao")->class('p-6')
-        )->class('bg-white rounded-lg shadow divide-y md:w-1/2 mx-auto');
+        )->class('bg-white shadow divide-y md:w-1/2 mx-auto');
     }
 }

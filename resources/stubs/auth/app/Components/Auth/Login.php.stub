@@ -20,6 +20,7 @@ class Login extends Component
     {
         return $v->section(
             $v->h1($this->viewTitle)->class('text-xl px-6 py-4'),
+
             $v->form(
                 $v->div(
                     $v->label('Email')->for('email'),

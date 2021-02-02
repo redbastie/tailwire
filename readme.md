@@ -2,7 +2,7 @@
 
 # Tailwire
 
-Build web apps without having to write HTML, CSS, or JavaScript! Powered by Laravel Livewire and Tailwind.
+Build reactive web apps without having to write HTML, CSS, or JavaScript! Powered by Laravel Livewire and Tailwind.
 
 Imagine a world where you no longer have to constantly context switch between HTML, CSS, and Javascript. Where all of your code can reside in self-contained PHP component classes. Even your database migration logic can stay inside of your models. It's kind of like SwiftUI for PHP!
 

@@ -33,10 +33,15 @@ trait ManagesFiles
 
     protected function deleteFile($filePath)
     {
-        if ($this->filesystem()->exists($filePath)) {
+        if ($this->fileExists($filePath)) {
             $this->filesystem()->delete($filePath);
             $this->warn("Deleted file: <info>$filePath</info>");
         }
+    }
+
+    protected function fileExists($filePath)
+    {
+        return $this->filesystem()->exists($filePath);
     }
 
     private function replace($replaces, $contents)

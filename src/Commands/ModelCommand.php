@@ -24,6 +24,7 @@ class ModelCommand extends Command
             'database/factories' => str_replace(['Database\\Factories', '\\'], ['database/factories', '/'], $dummyFactoryNamespace),
         ]);
 
-        $this->warn('<info>' . $this->argument('class') . '</info> model and factory generated!');
+        $this->warn('<info>' . $this->argument('class') . '</info> model & factory generated!');
+        $this->warn("Don't forget to <info>tailwire:migrate</info> after updating the new model.");
     }
 }
