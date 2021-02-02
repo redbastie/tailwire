@@ -55,6 +55,11 @@ class Component extends \Livewire\Component
         return $this->getErrorBag()->get($key)[0] ?? null;
     }
 
+    public function updatedModelSearch()
+    {
+        $this->perPage = 15;
+    }
+
     public function infiniteScroll()
     {
         $this->perPage += 15;
