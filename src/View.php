@@ -9,7 +9,6 @@ use Redbastie\Tailwire\Elements\ContentlessElement;
 use Redbastie\Tailwire\Elements\HiddenElement;
 use Redbastie\Tailwire\Elements\IconElement;
 use Redbastie\Tailwire\Elements\IncludeElement;
-use Redbastie\Tailwire\Elements\RecaptchaElement;
 
 class View
 {
@@ -603,14 +602,9 @@ class View
         return $this->hiddenElement(...$content)->id(__FUNCTION__);
     }
 
-    public function pullDownRefresh(...$content)
+    public function swipeDownRefresh(...$content)
     {
         return $this->hiddenElement(...$content)->id(__FUNCTION__);
-    }
-
-    public function recaptcha($theme = 'light')
-    {
-        return new RecaptchaElement($theme);
     }
 
     public function each($items, $closure)

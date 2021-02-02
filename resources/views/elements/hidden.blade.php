@@ -1,3 +1,3 @@
-<div {{ $attributes->merge(['class' => 'hidden']) }}>
+<div {{ $attributes->merge(['style' => 'display: none;']) }}>
     {!! $content !!}
 </div>

@@ -13,7 +13,7 @@ class Component extends \Livewire\Component
     public $viewTitle, $viewExtends;
     public $model = [];
     public $perPage = 15;
-    protected $listeners = ['$refresh', 'infiniteScroll', 'recaptcha'];
+    protected $listeners = ['$refresh', 'infiniteScroll'];
 
     public function view(View $v)
     {
@@ -31,7 +31,7 @@ class Component extends \Livewire\Component
             $component = $this;
         }
 
-        return view('tailwire::component', ['view' => $component->view($view)]);
+        return view('tailwire::component', ['view' => $component->view($view)])->layout('tailwire::layout');
     }
 
     public function model($key)
@@ -43,21 +43,21 @@ class Component extends \Livewire\Component
     {
         [$rules, $messages, $attributes] = $this->providedOrGlobalRulesMessagesAndAttributes($rules, $messages, $attributes);
         $validator = Validator::make($this->model, $rules, $messages, $attributes);
+        $validated = $validator->validate();
 
-        if ($validator->fails()) {
-            if (array_key_exists('recaptcha', $rules)) {
-                $this->emit('resetRecaptcha');
-            }
+        $this->resetErrorBag();
 
-            throw new ValidationException($validator);
-        }
-
-        return $validator->validated();
+        return $validated;
     }
 
     public function error($key)
     {
         return $this->getErrorBag()->get($key)[0] ?? null;
+    }
+
+    public function infiniteScroll()
+    {
+        $this->perPage += 15;
     }
 
     public function bodyScrollLock()
@@ -68,16 +68,5 @@ class Component extends \Livewire\Component
     public function bodyScrollUnlock()
     {
         $this->emit('bodyScrollUnlock');
-    }
-
-    public function infiniteScroll()
-    {
-        $this->perPage += 15;
-        $this->emit('infiniteScrolled');
-    }
-
-    public function recaptcha($response)
-    {
-        $this->model['recaptcha'] = $response;
     }
 }

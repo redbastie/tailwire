@@ -27,7 +27,7 @@ return [
     |
     */
 
-    'view_path' => resource_path('views'),
+    'view_path' => resource_path('views/livewire'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'layout' => 'tailwire::layout',
+    'layout' => 'layouts.app',
 
     /*
     |--------------------------------------------------------------------------

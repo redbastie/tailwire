@@ -5,16 +5,12 @@ namespace Redbastie\Tailwire;
 use Faker\Generator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 class Model extends \Illuminate\Database\Eloquent\Model
 {
     use HasFactory;
 
-    public function getFillable()
-    {
-        return Schema::getColumnListing($this->getTable());
-    }
+    protected $guarded = [];
 
     public function migration(Blueprint $table)
     {

@@ -3,12 +3,6 @@
 namespace Redbastie\Tailwire\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Redbastie\Tailwire\Commands\AuthCommand;
-use Redbastie\Tailwire\Commands\ComponentCommand;
-use Redbastie\Tailwire\Commands\CrudCommand;
-use Redbastie\Tailwire\Commands\InstallCommand;
-use Redbastie\Tailwire\Commands\MigrateCommand;
-use Redbastie\Tailwire\Commands\ModelCommand;
 
 class TailwireServiceProvider extends ServiceProvider
 {
@@ -16,12 +10,12 @@ class TailwireServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                AuthCommand::class,
-                ComponentCommand::class,
-                CrudCommand::class,
-                InstallCommand::class,
-                MigrateCommand::class,
-                ModelCommand::class,
+                \Redbastie\Tailwire\Commands\AuthCommand::class,
+                \Redbastie\Tailwire\Commands\ComponentCommand::class,
+                \Redbastie\Tailwire\Commands\CrudCommand::class,
+                \Redbastie\Tailwire\Commands\InstallCommand::class,
+                \Redbastie\Tailwire\Commands\MigrateCommand::class,
+                \Redbastie\Tailwire\Commands\ModelCommand::class,
             ]);
         }
 

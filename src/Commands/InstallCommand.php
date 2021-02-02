@@ -3,6 +3,7 @@
 namespace Redbastie\Tailwire\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
 class InstallCommand extends Command
 {
@@ -17,6 +18,8 @@ class InstallCommand extends Command
         ]);
 
         $this->deleteFile('database/migrations/2014_10_12_000000_create_users_table.php');
+
+        Artisan::call('tailwire:migrate', [], $this->getOutput());
 
         exec('npm install');
         exec('npm install tailwindcss@latest postcss@latest autoprefixer@latest @tailwindcss/forms -D');

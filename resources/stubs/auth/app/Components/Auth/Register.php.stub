@@ -5,9 +5,7 @@ namespace App\Components\Auth;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Redbastie\Tailwire\Component;
-use Redbastie\Tailwire\Rules\RecaptchaRule;
 use Redbastie\Tailwire\View;
 
 class Register extends Component
@@ -26,38 +24,33 @@ class Register extends Component
                 $v->div(
                     $v->label('Name')->for('name'),
                     $v->input()->id('name')->wireModelDefer('name')
-                        ->class(($this->error('name') ? 'border-red-500' : 'border-gray-300') . ' rounded-md shadow-sm w-full'),
+                        ->class(($this->error('name') ? 'border-red-500' : 'border-gray-300') . ' w-full'),
                     $v->if($this->error('name'), fn() => $v->p($this->error('name'))->class('text-xs text-red-600'))
                 )->class('space-y-1'),
 
                 $v->div(
                     $v->label('Email')->for('email'),
                     $v->input()->type('email')->id('email')->wireModelDefer('email')
-                        ->class(($this->error('email') ? 'border-red-500' : 'border-gray-300') . ' rounded-md shadow-sm w-full'),
+                        ->class(($this->error('email') ? 'border-red-500' : 'border-gray-300') . ' w-full'),
                     $v->if($this->error('email'), fn() => $v->p($this->error('email'))->class('text-xs text-red-600'))
                 )->class('space-y-1'),
 
                 $v->div(
                     $v->label('Password')->for('password'),
                     $v->input()->type('password')->id('password')->wireModelDefer('password')
-                        ->class(($this->error('password') ? 'border-red-500' : 'border-gray-300') . ' rounded-md shadow-sm w-full'),
+                        ->class(($this->error('password') ? 'border-red-500' : 'border-gray-300') . ' w-full'),
                     $v->if($this->error('password'), fn() => $v->p($this->error('password'))->class('text-xs text-red-600'))
                 )->class('space-y-1'),
 
                 $v->div(
                     $v->label('Confirm Password')->for('password_confirmation'),
                     $v->input()->type('password')->id('password_confirmation')->wireModelDefer('password_confirmation')
-                        ->class('border-gray-300 rounded-md shadow-sm w-full'),
+                        ->class('border-gray-300 w-full'),
                 )->class('space-y-1'),
 
-                $v->div(
-                    $v->recaptcha(),
-                    $v->if($this->error('recaptcha'), fn() => $v->p($this->error('recaptcha'))->class('text-xs text-red-600'))
-                )->class('space-y-1 overflow-hidden'),
-
-                $v->button('Register')->type('submit')->class('text-white bg-blue-600 hover:bg-blue-700 rounded-md shadow-sm w-full py-2')
-            )->wireSubmitPrevent('register')->class('p-6 space-y-4')
-        )->class('bg-white rounded-lg shadow divide-y md:w-1/2 mx-auto');
+                $v->button('Register')->type('submit')->class('text-white bg-blue-600 w-full py-2')
+            )->wireSubmitPrevent('register')->class('space-y-4 p-6')
+        )->class('bg-white shadow divide-y md:w-1/2 mx-auto');
     }
 
     public function register()
@@ -66,11 +59,9 @@ class Register extends Component
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'confirmed'],
-            'recaptcha' => ['required', new RecaptchaRule],
         ]);
 
-        $validated['password'] = Hash::make($validated['password']);
-        $user = User::query()->create($validated);
+        $user = User::create($validated);
 
         Auth::login($user, true);
 

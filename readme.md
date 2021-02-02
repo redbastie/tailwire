@@ -26,9 +26,8 @@ Imagine a world where you no longer have to constantly context switch between HT
 - Automatic user timezones
 - Easy app versioning
 - PWA capabilities (standalone launcher, icons, etc.)
-- Pull down refresh (iOS PWA)
+- Swipe down refresh (iOS PWA)
 - Infinite scrolling
-- Google Recaptcha integration
 - Heroicon integration
 - & more!
 
@@ -50,9 +49,8 @@ Imagine a world where you no longer have to constantly context switch between HT
     - [Wiring elements via Livewire](#wiring-elements-via-livewire)
     - [Using directives & other methods](#using-directives--other-methods)
 - [Guides](#guides)
-    - [Pull down refresh](#pull-down-refresh)
+    - [Swipe down refresh](#swipe-down-refresh)
     - [Infinite scrolling](#infinite-scrolling)
-    - [Google Recaptcha](#google-recaptcha)
 
 **Links:**
 
@@ -377,10 +375,10 @@ Heroicons ([list of available icons here](https://heroicons.com)):
 $v->icon('cog')->class('text-blue-600 w-5 h-5'),
 ```
 
-Pull down to refresh indicator (for iOS PWA's):
+Swipe down to refresh indicator (for iOS PWA's):
 
 ```php
-$v->pullDownRefresh(
+$v->swipeDownRefresh(
     $v->icon('refresh')->class('animate-spin text-gray-400 w-5 h-5 mx-auto')
 )->class('mb-4'),
 ```
@@ -393,28 +391,17 @@ $v->infiniteScroll(
 )->class('mt-4'),
 ```
 
-Google Recaptcha:
-
-```php
-$v->div(
-    $v->recaptcha(),
-    $v->if($this->error('recaptcha'), 
-        fn() => $v->p($this->error('recaptcha'))->class('text-xs text-red-600')
-    )
-)->class('space-y-1 overflow-hidden'),
-```
-
 ## Guides
 
-### Pull down refresh
+### Swipe down refresh
 
 ```php
-$v->pullDownRefresh(
+$v->swipeDownRefresh(
     $v->icon('refresh')->class('animate-spin text-gray-400 w-5 h-5 mx-auto')
 )->class('mb-4'),
 ```
 
-If a user has scrolled `-100px` from the top of the page, the `pullDownRefresh` element will display briefly before the entire page is reloaded. This is useful for PWA's, when the user adds your web app to their home screen and needs a way to refresh the page.
+If a user has scrolled `-100px` from the top of the page, the `swipeDownRefresh` element will display briefly before the entire page is reloaded. This is useful for PWA's, when the user adds your web app to their home screen and needs a way to refresh the page.
 
 ### Infinite scrolling
 
@@ -446,45 +433,3 @@ public function query()
 ```
 
 Each Tailwire component contains a `$perPage` public property which is incremented if the hidden `infiniteScroll` element is present on the page and the user scrolls `100px` from the bottom. After it is incremented, the component should load more items and hide the `infiniteScroll` element again. See how `query()`, `paginate()`, `count()`, and `$perPage` are used in the example above.
-
-### Google Recaptcha
-
-```php
-public function view(View $v)
-{
-    return $v->section(
-        $v->h1('Create Vehicle')->class('text-xl px-6 py-4'),
-        $v->form(
-            $v->div(
-                $v->label('Name')->for('name'),
-                $v->input()->id('name')->wireModelDefer('name')
-                    ->class($this->error('name') ? 'border-red-500' : 'border-gray-300'),
-                $v->if($this->error('name'), 
-                    fn() => $v->p($this->error('name'))->class('text-xs text-red-600')
-                )
-            )->class('space-y-1'),
-
-            $v->div(
-                $v->recaptcha(),
-                $v->if($this->error('recaptcha'), 
-                    fn() => $v->p($this->error('recaptcha'))->class('text-xs text-red-600')
-                )
-            )->class('space-y-1 overflow-hidden'),
-
-            $v->button('Create Vehicle')->type('submit')->class('text-white bg-blue-600 px-4 py-2')
-        )->wireSubmitPrevent('create')->class('space-y-4')
-    )->class('bg-white rounded-lg shadow divide-y');
-}
-
-public function create()
-{
-    $validated = $this->validate([
-        'name' => ['required'],
-        'recaptcha' => ['required', new RecaptchaRule],
-    ]);
-
-    Vehicle::query()->create($validated);
-}
-```
-
-The `recaptcha` element will automatically model a `recaptcha` response value to your component once it is completed. Note the use of the `RecaptchaRule`, which checks to see if the response was correct via the Recaptcha SDK.

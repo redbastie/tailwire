@@ -1,10 +1,7 @@
 module.exports = {
-    purge: {
-        content: ['./app/Components/**/*.php'],
-        options: {
-            safelist: ['hidden']
-        },
-    },
+    purge: [
+        './app/Components/**/*.php',
+    ],
     darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {},
