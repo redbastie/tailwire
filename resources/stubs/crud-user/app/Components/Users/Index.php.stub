@@ -8,8 +8,8 @@ use Redbastie\Tailwire\View;
 
 class Index extends Component
 {
-    public $routeUri = '/user';
-    public $routeName = 'user';
+    public $routeUri = '/users';
+    public $routeName = 'users';
     public $routeMiddleware = 'auth';
     public $viewTitle = 'Users';
     public $viewExtends = 'layouts.app';
@@ -22,7 +22,7 @@ class Index extends Component
             $v->div(
                 $v->input()->type('search')->placeholder('Search Users')->wireModelDebounce('search')
                     ->class('placeholder-gray-400 border-gray-300 rounded-md shadow-sm w-44 md:w-60'),
-                $v->button('Create', $v->span(' User')->class('hidden md:inline'))->wireClick('$emitTo', 'user.save', 'show')
+                $v->button('Create', $v->span(' User')->class('hidden md:inline'))->wireClick('$emitTo', 'users.save', 'show')
                     ->class('text-white bg-blue-600 hover:bg-blue-700 rounded-md shadow-sm px-4 py-2')
             )->class('flex items-center justify-between mb-4'),
 
@@ -34,9 +34,9 @@ class Index extends Component
                             $v->li(timezone($user->created_at))->class('text-xs text-gray-600')
                         ),
                         $v->nav(
-                            $v->button($v->icon('eye'))->wireClick('$emitTo', 'user.read', 'show', $user->id)
+                            $v->button($v->icon('eye'))->wireClick('$emitTo', 'users.read', 'show', $user->id)
                                 ->class('text-gray-400 hover:text-gray-600 w-5 h-5'),
-                            $v->button($v->icon('pencil-alt'))->wireClick('$emitTo', 'user.save', 'show', $user->id)
+                            $v->button($v->icon('pencil-alt'))->wireClick('$emitTo', 'users.save', 'show', $user->id)
                                 ->class('text-gray-400 hover:text-gray-600 w-5 h-5'),
                             $v->button($v->icon('trash'))->wireClick('delete', $user->id)->confirm('Delete this User?')
                                 ->class('text-gray-400 hover:text-gray-600 w-5 h-5')
@@ -53,8 +53,8 @@ class Index extends Component
                 )->class('mt-4')
             ),
 
-            $v->include('user.read'),
-            $v->include('user.save'),
+            $v->include('users.read'),
+            $v->include('users.save'),
         );
     }
 

@@ -4,7 +4,6 @@ namespace Redbastie\Tailwire;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 use Livewire\LivewireManager;
 
 class Component extends \Livewire\Component
@@ -12,8 +11,9 @@ class Component extends \Livewire\Component
     public $routeUri, $routeName, $routeMiddleware, $routeDomain, $routeWhere;
     public $viewTitle, $viewExtends;
     public $model = [];
+    public $show = false;
     public $perPage = 15;
-    protected $listeners = ['$refresh', 'infiniteScroll'];
+    protected $listeners = ['$refresh', 'show', 'infiniteScroll'];
 
     public function view(View $v)
     {

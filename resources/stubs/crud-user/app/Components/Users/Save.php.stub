@@ -9,8 +9,6 @@ use Redbastie\Tailwire\View;
 class Save extends Component
 {
     public $user;
-    public $show = false;
-    protected $listeners = ['show'];
 
     public function view(View $v)
     {
