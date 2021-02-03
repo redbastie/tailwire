@@ -12,12 +12,12 @@ class Read extends Component
 
     public function view(View $v)
     {
-        return $v->if($this->visible,
+        return $v->if($this->show,
             fn() => $v->section(
                 $v->div(
                     $v->div(
                         $v->h1('DummyModelTitle')->class('text-xl'),
-                        $v->button($v->icon('x')->wireClick('toggleVisibility')->class('text-gray-400 w-5 h-5'))
+                        $v->button($v->icon('x')->wireClick('toggleShow')->class('text-gray-400 w-5 h-5'))
                     )->class('flex items-center justify-between px-6 py-4'),
 
                     $v->div(
@@ -43,7 +43,7 @@ class Read extends Component
                     )->class('space-y-4 p-6'),
 
                     $v->div(
-                        $v->button('Close')->wireClick('toggleVisibility')->class('text-white bg-gray-500 px-3 py-2')
+                        $v->button('Close')->wireClick('toggleShow')->class('text-white bg-gray-500 px-3 py-2')
                     )->class('flex justify-end space-x-4 px-6 py-4'),
                 )->class('bg-white shadow divide-y max-w-screen-sm mx-auto')
             )->class('fixed inset-0 bg-black bg-opacity-50 overflow-y-auto p-4')
@@ -53,6 +53,7 @@ class Read extends Component
     public function show(DummyModel $DummyModelVariable = null)
     {
         $this->DummyModelVariable = $DummyModelVariable;
-        $this->toggleVisibility();
+
+        $this->toggleShow();
     }
 }

@@ -1,0 +1,57 @@
+<?php
+
+namespace DummyComponentNamespace;
+
+use DummyModelNamespace\DummyModel;
+use Redbastie\Tailwire\Component;
+use Redbastie\Tailwire\View;
+
+class DummyComponent extends Component
+{
+    public $routeUri = '/DummyRouteUri';
+    public $routeName = 'DummyRouteName';
+    public $viewTitle = 'DummyViewTitle';
+    public $viewExtends = 'layouts.app';
+
+    public function view(View $v)
+    {
+        return $v->section(
+            $v->h1($this->viewTitle)->class('text-xl mb-2'),
+
+            $v->div(
+                $v->input()->type('search')->placeholder('Search DummyModelTitles')->wireModelDebounce('search')
+                    ->class('border-gray-300 min-w-0')
+            )->class('flex justify-between space-x-4 mb-4'),
+
+            $v->div(
+                $v->each($this->query()->paginate($this->perPage),
+                    fn(DummyModel $DummyModelVariable) => $v->div(
+                        $v->ul(
+                            $v->li($DummyModelVariable->name),
+                            $v->li(timezone($DummyModelVariable->created_at))->class('text-xs text-gray-500')
+                        )
+                    )->class('flex items-center justify-between px-6 py-4')
+                )->empty(
+                    fn() => $v->p('No DummyModelTitles found.')->class('px-6 py-4')
+                )
+            )->class('bg-white shadow divide-y'),
+
+            $v->if($this->query()->count() > $this->perPage,
+                fn() => $v->infiniteScroll(
+                    $v->icon('refresh')->class('animate-spin text-gray-400 w-5 h-5 mx-auto')
+                )->class('mt-4')
+            )
+        );
+    }
+
+    public function query()
+    {
+        $query = DummyModel::query();
+
+        if ($this->model('search')) {
+            $query->where('name', 'like', '%' . $this->model('search') . '%');
+        }
+
+        return $query->orderBy('name');
+    }
+}

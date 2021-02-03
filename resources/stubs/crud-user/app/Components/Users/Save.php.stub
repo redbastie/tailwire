@@ -12,12 +12,12 @@ class Save extends Component
 
     public function view(View $v)
     {
-        return $v->if($this->visible,
+        return $v->if($this->show,
             fn() => $v->section(
                 $v->form(
                     $v->div(
                         $v->h1($this->viewTitle)->class('text-xl'),
-                        $v->button($v->icon('x'))->wireClick('toggleVisibility')->class('text-gray-400 w-5 h-5')
+                        $v->button($v->icon('x'))->wireClick('toggleShow')->class('text-gray-400 w-5 h-5')
                     )->class('flex items-center justify-between px-6 py-4'),
 
                     $v->div(
@@ -50,7 +50,7 @@ class Save extends Component
                     )->class('space-y-4 p-6'),
 
                     $v->div(
-                        $v->button('Cancel')->wireClick('toggleVisibility')->class('text-white bg-gray-500 px-3 py-2'),
+                        $v->button('Cancel')->wireClick('toggleShow')->class('text-white bg-gray-500 px-3 py-2'),
                         $v->button('Save')->type('submit')->class('text-white bg-blue-600 px-3 py-2')
                     )->class('flex justify-end space-x-4 px-6 py-4'),
                 )->wireSubmitPrevent('save')->class('bg-white shadow divide-y max-w-screen-sm mx-auto')
@@ -74,7 +74,7 @@ class Save extends Component
         }
 
         $this->emitUp('$refresh');
-        $this->toggleVisibility();
+        $this->toggleShow();
     }
 
     public function show(User $user = null)
@@ -82,6 +82,7 @@ class Save extends Component
         $this->viewTitle = $user->exists ? 'Update User' : 'Create User';
         $this->model = $user->toArray();
         $this->user = $user;
-        $this->toggleVisibility();
+
+        $this->toggleShow();
     }
 }

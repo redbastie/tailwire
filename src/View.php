@@ -622,4 +622,9 @@ class View
     {
         return new IfDirective($condition, $closure);
     }
+
+    public function blade($view, $data = [])
+    {
+        return view($view, $data)->render();
+    }
 }

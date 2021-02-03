@@ -19,6 +19,6 @@ class Home extends Component
             $v->h1($this->viewTitle)->class('text-xl px-6 py-4'),
 
             $v->p('You are logged in!')->class('p-6')
-        )->class('bg-white shadow divide-y md:w-1/2 mx-auto');
+        )->class('bg-white shadow divide-y md:w-1/3 mx-auto');
     }
 }
