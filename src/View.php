@@ -7,6 +7,7 @@ use Redbastie\Tailwire\Directives\IfDirective;
 use Redbastie\Tailwire\Elements\ContentElement;
 use Redbastie\Tailwire\Elements\ContentlessElement;
 use Redbastie\Tailwire\Elements\HiddenElement;
+use Redbastie\Tailwire\Elements\HoneyElement;
 use Redbastie\Tailwire\Elements\IconElement;
 use Redbastie\Tailwire\Elements\IncludeElement;
 
@@ -595,6 +596,11 @@ class View
     public function include($include, $data = [])
     {
         return new IncludeElement($include, $data);
+    }
+
+    public function honey($recaptcha = false)
+    {
+        return new HoneyElement($recaptcha);
     }
 
     public function infiniteScroll(...$content)

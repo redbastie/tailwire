@@ -1,0 +1,1 @@
+<x-honey-recaptcha/>

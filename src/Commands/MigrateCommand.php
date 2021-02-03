@@ -11,11 +11,21 @@ use Illuminate\Support\Facades\Schema;
 
 class MigrateCommand extends Command
 {
-    protected $signature = 'tailwire:migrate {--fresh} {--seed}';
+    protected $signature = 'tailwire:migrate {--fresh} {--seed} {--force}';
 
     public function handle()
     {
-        Artisan::call('migrate' . ($this->option('fresh') ? ':fresh' : '') . ' --force');
+        if (config('app.env') == 'production' && !$this->option('force')) {
+            $this->warn('You must use the <info>--force</info> to migrate in production!');
+
+            return;
+        }
+
+        $migrateCommand = 'migrate';
+        if ($this->option('fresh')) $migrateCommand .= ':fresh';
+        if ($this->option('force')) $migrateCommand .= ' --force';
+
+        Artisan::call($migrateCommand);
 
         $filesystem = new Filesystem;
 
@@ -42,7 +52,8 @@ class MigrateCommand extends Command
                         }
 
                         Schema::drop($tempTable);
-                    } else {
+                    }
+                    else {
                         Schema::create($class->getTable(), function (Blueprint $table) use ($class) {
                             $class->migration($table);
                         });
@@ -54,7 +65,10 @@ class MigrateCommand extends Command
         $this->info('Migration complete!');
 
         if ($this->option('seed')) {
-            Artisan::call('db:seed --force');
+            $seedCommand = 'db:seed';
+            if ($this->option('force')) $seedCommand .= ' --force';
+
+            Artisan::call($seedCommand);
 
             $this->info('Seeding complete!');
         }

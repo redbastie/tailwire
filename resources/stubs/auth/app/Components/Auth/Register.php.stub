@@ -49,6 +49,8 @@ class Register extends Component
                         ->class('border-gray-300 w-full'),
                 )->class('space-y-1'),
 
+                $v->honey(),
+
                 $v->button('Register')->type('submit')->class('text-white bg-blue-600 w-full py-2')
             )->wireSubmitPrevent('register')->class('space-y-4 p-6')
         )->class('bg-white shadow divide-y md:w-1/2 mx-auto');

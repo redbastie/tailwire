@@ -5,9 +5,12 @@ namespace Redbastie\Tailwire;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Livewire\LivewireManager;
+use Lukeraymonddowning\Honey\Traits\WithHoney;
 
 class Component extends \Livewire\Component
 {
+    use WithHoney;
+
     public $routeUri, $routeName, $routeMiddleware, $routeDomain, $routeWhere;
     public $viewTitle, $viewExtends;
     public $model = [];
@@ -27,7 +30,8 @@ class Component extends \Livewire\Component
         if ($this->viewExtends) {
             $component = app((new LivewireManager)->getClass($this->viewExtends));
             $view->yield = $this->view($view);
-        } else {
+        }
+        else {
             $component = $this;
         }
 
