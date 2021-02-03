@@ -454,11 +454,29 @@ Each Tailwire component contains a `$perPage` public property which is increment
 ### Honeypot spam prevention
 
 ```php
-$v->honey()
+$v->form(
+    $v->div(
+        $v->label('Email')->for('email'),
+        $v->input()->type('email')->id('email')->wireModelDefer('email')
+            ->class(($this->error('email') ? 'border-red-500' : 'border-gray-300') . ' w-full'),
+        $v->if($this->error('email'), fn() => $v->p($this->error('email'))->class('text-xs text-red-600'))
+    )->class('space-y-1'),
+
+    $v->div(
+        $v->label('Password')->for('password'),
+        $v->input()->type('password')->id('password')->wireModelDefer('password')
+            ->class(($this->error('password') ? 'border-red-500' : 'border-gray-300') . ' w-full'),
+        $v->if($this->error('password'), fn() => $v->p($this->error('password'))->class('text-xs text-red-600'))
+    )->class('space-y-1'),
+
+    $v->honey(), // stop spam bots!
+
+    $v->button('Register')->type('submit')->class('text-white bg-blue-600 w-full py-2')
+)->wireSubmitPrevent('register')->class('space-y-4 p-6')
 ```
 
 Tailwire uses [Honey](https://github.com/lukeraymonddowning/honey) for spam bot prevention. See the repo for that package for more information. You can also use recaptcha by passing `true` to the element:
 
 ```php
-$v->honey(true) // use honey recaptcha (be sure to configure it!)
+$v->honey(true) // use honey with recaptcha (be sure to configure it!)
 ```
