@@ -1,11 +1,11 @@
 <?php
 
-namespace DummyNamespace;
+namespace DummyComponentNamespace;
 
 use Redbastie\Tailwire\Component;
 use Redbastie\Tailwire\View;
 
-class DummyClass extends Component
+class DummyComponent extends Component
 {
     public $routeUri = '/DummyRouteUri';
     public $routeName = 'DummyRouteName';

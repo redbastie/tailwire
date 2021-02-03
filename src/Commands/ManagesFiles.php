@@ -21,21 +21,24 @@ trait ManagesFiles
     protected function createFiles($stubFolder, $replaces = [])
     {
         foreach ($this->filesystem()->allFiles(__DIR__ . '/../../resources/stubs/' . $stubFolder) as $file) {
-            if ($fileDir = $this->replace($replaces, $file->getRelativePath())) {
+            $filePath = Str::replaceLast('.stub', '', $this->replace($replaces, $file->getRelativePathname()));
+
+            if ($fileDir = implode('/', array_slice(explode('/', $filePath), 0, -1))) {
                 $this->filesystem()->ensureDirectoryExists($fileDir);
             }
 
-            $filePath = $this->replace($replaces, Str::replaceLast('.stub', '', $file->getRelativePathname()));
             $this->filesystem()->put($filePath, $this->replace($replaces, $file->getContents()));
-            $this->warn("Created file: <info>$filePath</info>");
+            $this->warn('Created file: <info>' . $filePath . '</info>');
         }
     }
 
-    protected function deleteFile($filePath)
+    protected function deleteFiles($filePaths)
     {
-        if ($this->fileExists($filePath)) {
-            $this->filesystem()->delete($filePath);
-            $this->warn("Deleted file: <info>$filePath</info>");
+        foreach ($filePaths as $filePath) {
+            if ($this->fileExists($filePath)) {
+                $this->filesystem()->delete($filePath);
+                $this->warn('Deleted file: <info>' . $filePath . '</info>');
+            }
         }
     }
 

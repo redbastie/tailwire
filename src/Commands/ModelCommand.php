@@ -14,14 +14,15 @@ class ModelCommand extends Command
     public function handle()
     {
         $modelParser = new ComponentParser('App\\Models', resource_path('views'), $this->argument('class'));
-        $factoryParser = new ComponentParser('Database\\Factories', resource_path('views'), $this->argument('class'));
+        $factoryParser = new ComponentParser('Database\\Factories', resource_path('views'), $this->argument('class') . 'Factory');
 
         $this->createFiles('model', [
-            'DummyModelNamespace' => $dummyModelNamespace = $modelParser->classNamespace(),
-            'DummyFactoryNamespace' => $dummyFactoryNamespace = $factoryParser->classNamespace(),
-            'DummyClass' => $modelParser->className(),
-            'app/Models' => str_replace(['App\\Models', '\\'], ['app/Models', '/'], $dummyModelNamespace),
-            'database/factories' => str_replace(['Database\\Factories', '\\'], ['database/factories', '/'], $dummyFactoryNamespace),
+            'app/Models/DummyModel.php.stub' => $modelParser->relativeClassPath(),
+            'database/factories/DummyFactory.php.stub' => str_replace('app/Database/Factories', 'database/factories', $factoryParser->relativeClassPath()),
+            'DummyModelNamespace' => $modelParser->classNamespace(),
+            'DummyModel' => $modelParser->className(),
+            'DummyFactoryNamespace' => $factoryParser->classNamespace(),
+            'DummyFactory' => $factoryParser->className(),
         ]);
 
         $this->warn('<info>' . $this->argument('class') . '</info> model & factory generated!');

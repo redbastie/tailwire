@@ -17,7 +17,9 @@ class InstallCommand extends Command
             'DummyAppName' => config('app.name'),
         ]);
 
-        $this->deleteFile('database/migrations/2014_10_12_000000_create_users_table.php');
+        $this->deleteFiles([
+            'database/migrations/2014_10_12_000000_create_users_table.php',
+        ]);
 
         Artisan::call('tailwire:migrate', [], $this->getOutput());
 

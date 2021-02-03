@@ -2,12 +2,12 @@
 
 namespace DummyFactoryNamespace;
 
-use DummyModelNamespace\DummyClass;
+use DummyModelNamespace\DummyModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DummyClassFactory extends Factory
+class DummyFactory extends Factory
 {
-    protected $model = DummyClass::class;
+    protected $model = DummyModel::class;
 
     public function definition()
     {
