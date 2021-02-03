@@ -10,8 +10,8 @@
 
     @livewireStyles
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ config('app.version') }}">
-    <link rel="icon" href="{{ asset('images/fav-icon.png') }}?v={{ config('app.version') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/apple-touch-icon.png') }}?v={{ config('app.version') }}"/>
+    <link rel="icon" href="{{ asset('images/icon-fav.png') }}?v={{ config('app.version') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/icon-touch.png') }}?v={{ config('app.version') }}"/>
     <link rel="manifest" href="{{ asset('json/manifest.json') }}?v={{ config('app.version') }}">
 
     <title>@hasSection('viewTitle') @yield('viewTitle') | @endif {{ config('app.name') }}</title>

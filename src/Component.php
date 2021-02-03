@@ -14,7 +14,7 @@ class Component extends \Livewire\Component
     public $routeUri, $routeName, $routeMiddleware, $routeDomain, $routeWhere;
     public $viewTitle, $viewExtends;
     public $model = [];
-    public $show = false;
+    public $visible = false;
     public $perPage = 15;
     protected $listeners = ['$refresh', 'show', 'infiniteScroll'];
 
@@ -69,13 +69,10 @@ class Component extends \Livewire\Component
         $this->perPage += 15;
     }
 
-    public function bodyScrollLock()
+    public function toggleVisibility()
     {
-        $this->emit('bodyScrollLock');
-    }
+        $this->visible = !$this->visible;
 
-    public function bodyScrollUnlock()
-    {
-        $this->emit('bodyScrollUnlock');
+        $this->emit($this->visible ? 'bodyScrollLock' : 'bodyScrollUnlock');
     }
 }

@@ -1,0 +1,65 @@
+<?php
+
+namespace DummyComponentNamespace;
+
+use DummyModelNamespace\DummyModel;
+use Redbastie\Tailwire\Component;
+use Redbastie\Tailwire\View;
+
+class Save extends Component
+{
+    public $DummyModelVariable;
+
+    public function view(View $v)
+    {
+        return $v->if($this->visible,
+            fn() => $v->section(
+                $v->form(
+                    $v->div(
+                        $v->h1($this->viewTitle)->class('text-xl'),
+                        $v->button($v->icon('x'))->wireClick('toggleVisibility')->class('text-gray-400 w-5 h-5')
+                    )->class('flex items-center justify-between px-6 py-4'),
+
+                    $v->div(
+                        $v->div(
+                            $v->label('Name')->for('name'),
+                            $v->input()->id('name')->wireModelDefer('name')
+                                ->class(($this->error('name') ? 'border-red-500' : 'border-gray-300') . ' w-full'),
+                            $v->if($this->error('name'), fn() => $v->p($this->error('name'))->class('text-xs text-red-600'))
+                        )->class('space-y-1'),
+                    )->class('space-y-4 p-6'),
+
+                    $v->div(
+                        $v->button('Cancel')->wireClick('toggleVisibility')->class('text-white bg-gray-500 px-3 py-2'),
+                        $v->button('Save')->type('submit')->class('text-white bg-blue-600 px-3 py-2')
+                    )->class('flex justify-end space-x-4 px-6 py-4'),
+                )->wireSubmitPrevent('save')->class('bg-white shadow divide-y max-w-screen-sm mx-auto')
+            )->class('fixed inset-0 bg-black bg-opacity-50 overflow-y-auto p-4')
+        );
+    }
+
+    public function save()
+    {
+        $validated = $this->validate([
+            'name' => ['required'],
+        ]);
+
+        if ($this->DummyModelVariable->exists) {
+            $this->DummyModelVariable->update($validated);
+        }
+        else {
+            DummyModel::create($validated);
+        }
+
+        $this->emitUp('$refresh');
+        $this->toggleVisibility();
+    }
+
+    public function show(DummyModel $DummyModelVariable = null)
+    {
+        $this->viewTitle = $DummyModelVariable->exists ? 'Update DummyModelTitle' : 'Create DummyModelTitle';
+        $this->model = $DummyModelVariable->toArray();
+        $this->DummyModelVariable = $DummyModelVariable;
+        $this->toggleVisibility();
+    }
+}

@@ -232,7 +232,7 @@ Tailwire uses an expressive syntax in order to build HTML elements. As you can s
 After the first method, each additional chained method represents an attribute of the element. For example, creating an image:
 
 ```php
-$v->img()->src(asset('images/fav-icon.png'))->class('w-5 h-5')
+$v->img()->src(asset('images/icon-fav.png'))->class('w-5 h-5')
 ```
 
 This would translate to an image with an `src` of the asset URL, using the Tailwind classes `w-5 h-5` for styling. A list of available HTML element attributes can be found here: [HTML Attribute Reference](https://www.w3schools.com/tags/ref_attributes.asp)

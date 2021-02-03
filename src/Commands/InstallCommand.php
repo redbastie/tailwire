@@ -19,6 +19,7 @@ class InstallCommand extends Command
 
         $this->deleteFiles([
             'database/migrations/2014_10_12_000000_create_users_table.php',
+            'resources/views/welcome.blade.php',
         ]);
 
         Artisan::call('tailwire:migrate', [], $this->getOutput());

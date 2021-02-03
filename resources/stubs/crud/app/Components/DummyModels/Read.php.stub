@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Components\Users;
+namespace DummyComponentNamespace;
 
-use App\Models\User;
+use DummyModelNamespace\DummyModel;
 use Redbastie\Tailwire\Component;
 use Redbastie\Tailwire\View;
 
 class Read extends Component
 {
-    public $user;
+    public $DummyModelVariable;
 
     public function view(View $v)
     {
@@ -16,44 +16,29 @@ class Read extends Component
             fn() => $v->section(
                 $v->div(
                     $v->div(
-                        $v->h1('User')->class('text-xl'),
+                        $v->h1('DummyModelTitle')->class('text-xl'),
                         $v->button($v->icon('x')->wireClick('toggleVisibility')->class('text-gray-400 w-5 h-5'))
                     )->class('flex items-center justify-between px-6 py-4'),
 
                     $v->div(
                         $v->dl(
                             $v->dt('ID')->class('text-xs text-gray-500'),
-                            $v->dd($this->user->id)
+                            $v->dd($this->DummyModelVariable->id)
                         ),
 
                         $v->dl(
                             $v->dt('Name')->class('text-xs text-gray-500'),
-                            $v->dd($this->user->name)
-                        ),
-
-                        $v->dl(
-                            $v->dt('Email')->class('text-xs text-gray-500'),
-                            $v->dd($this->user->email)
-                        ),
-
-                        $v->dl(
-                            $v->dt('Email Verified At')->class('text-xs text-gray-500'),
-                            $v->dd(timezone($this->user->email_verified_at))
-                        ),
-
-                        $v->dl(
-                            $v->dt('Timezone')->class('text-xs text-gray-500'),
-                            $v->dd($this->user->timezone ?? 'Empty')
+                            $v->dd($this->DummyModelVariable->name)
                         ),
 
                         $v->dl(
                             $v->dt('Created At')->class('text-xs text-gray-500'),
-                            $v->dd(timezone($this->user->created_at))
+                            $v->dd(timezone($this->DummyModelVariable->created_at))
                         ),
 
                         $v->dl(
                             $v->dt('Updated At')->class('text-xs text-gray-500'),
-                            $v->dd(timezone($this->user->updated_at))
+                            $v->dd(timezone($this->DummyModelVariable->updated_at))
                         ),
                     )->class('space-y-4 p-6'),
 
@@ -65,9 +50,9 @@ class Read extends Component
         );
     }
 
-    public function show(User $user = null)
+    public function show(DummyModel $DummyModelVariable = null)
     {
-        $this->user = $user;
+        $this->DummyModelVariable = $DummyModelVariable;
         $this->toggleVisibility();
     }
 }

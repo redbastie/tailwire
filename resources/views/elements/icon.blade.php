@@ -1,1 +1,1 @@
-<x-heroicon-o-cog {{ $attributes->merge() }}/>
+@svg('heroicon-o-' . $icon, $attributes->getAttributes())

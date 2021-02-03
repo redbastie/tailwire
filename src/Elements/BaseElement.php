@@ -470,7 +470,7 @@ class BaseElement
         return $this->attribute('wire:model', "model.$value");
     }
 
-    public function wireModelDebounce($value, $ms = 150)
+    public function wireModelDebounce($value, $ms = 500)
     {
         return $this->attribute("wire:model.debounce.{$ms}ms", "model.$value");
     }

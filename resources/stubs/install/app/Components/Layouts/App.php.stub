@@ -18,7 +18,7 @@ class App extends Component
 
             $v->header(
                 $v->a(
-                    $v->img()->src(asset('images/fav-icon.png'))->class('w-5 h-5'),
+                    $v->img()->src(asset('images/icon-fav.png'))->class('w-5 h-5'),
                     $v->span(config('app.name'))->class('text-xl')
                 )->href(route('index'))->class('flex items-center space-x-1'),
 
@@ -35,11 +35,11 @@ class App extends Component
                         )->class('flex space-x-4')
                     )
                 )
-            )->class('flex items-center justify-between max-w-screen-md mx-auto mb-4'),
+            )->class('flex items-center justify-between max-w-screen-lg mx-auto mb-4'),
 
             $v->main(
                 $v->yield()
-            )->class('max-w-screen-md mx-auto mb-4'),
+            )->class('max-w-screen-lg mx-auto mb-4'),
         )->class('bg-gray-100 m-4');
     }
 }
