@@ -36,14 +36,14 @@ class Save extends Component
                         )->class('space-y-1'),
 
                         $v->div(
-                            $v->label($this->user->exists? 'New Password' : 'Password')->for('password'),
+                            $v->label($this->user->exists ? 'New Password' : 'Password')->for('password'),
                             $v->input()->type('password')->id('password')->wireModelDefer('password')
                                 ->class(($this->error('password') ? 'border-red-500' : 'border-gray-300') . ' w-full'),
                             $v->if($this->error('password'), fn() => $v->p($this->error('password'))->class('text-xs text-red-600'))
                         )->class('space-y-1'),
 
                         $v->div(
-                            $v->label($this->user->exists? 'Confirm New Password' : 'Confirm Password')->for('password_confirmation'),
+                            $v->label($this->user->exists ? 'Confirm New Password' : 'Confirm Password')->for('password_confirmation'),
                             $v->input()->type('password')->id('password_confirmation')->wireModelDefer('password_confirmation')
                                 ->class('border-gray-300 w-full'),
                         )->class('space-y-1'),
