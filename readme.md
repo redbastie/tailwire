@@ -8,13 +8,13 @@ Imagine a world where you no longer have to constantly context switch between HT
 
 <a href="https://www.youtube.com/watch?v=UhC_jBIXYWE"><img src="https://i.imgur.com/jE6vY70.png"></a>
 
-**Requirements:**
+#### Requirements
 
 - Laravel 8
 - PHP 8
 - NPM
 
-**Features:**
+#### Features
 
 - Expressive HTML builder written using PHP
 - Tailwind styling & configuration built in
@@ -29,16 +29,26 @@ Imagine a world where you no longer have to constantly context switch between HT
 - Swipe down refresh (iOS PWA)
 - Infinite scrolling
 - Heroicon integration
+- Honeypot spam rejection
 - & more!
 
-**Docs:**
+#### Packages Used
+
+- [Laravel Livewire](https://github.com/livewire/livewire)
+- [Laravel Timezone](https://github.com/jamesmills/laravel-timezone)
+- [Doctrine DBAL](https://github.com/doctrine/dbal)
+- [Honey](https://github.com/lukeraymonddowning/honey)
+- [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)
+- [Blade Heroicons](https://github.com/blade-ui-kit/blade-heroicons)
+
+#### Docs
 
 - [Installation](#installation)
 - [Commands](#commands)
     - [Install Tailwire](#install-tailwire)
     - [Generate auth scaffolding](#generate-auth-scaffolding)
     - [Generate a component](#generate-a-component)
-    - [Generate simple CRUD](#generate-simple-crud)
+    - [Generate CRUD components](#generate-crud-components)
     - [Generate a Tailwire model](#generate-a-tailwire-model)
     - [Run automatic migrations](#run-automatic-migrations)
 - [Usage](#usage)
@@ -48,11 +58,11 @@ Imagine a world where you no longer have to constantly context switch between HT
     - [Styling elements via Tailwind](#styling-elements-via-tailwind)
     - [Wiring elements via Livewire](#wiring-elements-via-livewire)
     - [Using directives & other methods](#using-directives--other-methods)
-- [Guides](#guides)
+- [Extras](#extras)
     - [Swipe down refresh](#swipe-down-refresh)
     - [Infinite scrolling](#infinite-scrolling)
 
-**Links:**
+#### Links
 
 - Support: [GitHub Issues](https://github.com/redbastie/swift/issues)
 - Contribute: [GitHub Pulls](https://github.com/redbastie/swift/pulls)
@@ -94,7 +104,7 @@ php artisan tailwire:install
 php artisan tailwire:install
 ```
 
-Installs the base Tailwire components, User model & factory, config files, icons, PWA manifest, Tailwind CSS & config, JavaScript assets, webpack, and runs the necessary NPM commands.
+Installs the layout & index components, User model & factory, config files, icons, PWA manifest, Tailwind CSS & config, JavaScript assets, webpack, and runs the necessary NPM commands.
 
 ### Generate auth scaffolding
 
@@ -102,33 +112,36 @@ Installs the base Tailwire components, User model & factory, config files, icons
 php artisan tailwire:auth
 ```
 
-Generates auth scaffolding components including login, logout, register, password reset, home, and basic User CRUD.
+Generates auth components including login, logout, register, password reset, and home.
 
 ### Generate a component
 
 ```console
-php artisan tailwire:component {class} {--full}
+php artisan tailwire:component {class} {--full} {--modal} {--list} {--model=}
 ```
 
-Generates a Tailwire component class. You can use a subdirectory when specifying the component class, e.g. `Admin/Page`. Use the `--full` option to generate a full page component, or omit it to generate a basic component.
+Generates a Tailwire component. Use `--full` to generate a full page component, `--modal` for a modal, `--list --model=ModelClass` for a list, or omit all options for a basic component.
 
-**Examples:**
+#### Examples
 
 ```console
-php artisan tailwire:component VehicleListItem
-php artisan tailwire:component Vehicle --full
-php artisan tailwire:component Admin/Insurance --full
+php artisan tailwire:component VehicleItem
+php artisan tailwire:component VehiclePage --full
+php artisan tailwire:component Admin/InsuranceDialog --modal
+php artisan tailwire:component VehicleList --list --model=Vehicle
 ```
 
-### Generate simple CRUD
+### Generate CRUD components
 
 ```console
 php artisan tailwire:crud {class}
 ```
 
-Generates CRUD components, a model, and factory for the specified model class. You can also use a subdirectory when specifying the class, which will place the model and components in the corresponding directory/namespace.
+Generates CRUD components for the specified model class. If the model class does not exist, it will be created along with a factory automatically.
 
-**Examples:**
+If you specify `User` as the class, full user CRUD will be generated.
+
+#### Examples
 
 ```console
 php artisan tailwire:crud Vehicle
@@ -143,7 +156,7 @@ php artisan tailwire:model {class}
 
 Generates a Tailwire model and factory which comes with the automatic migration method and factory definition included. As with other commands, you can specify a subdirectory for the class.
 
-**Examples:**
+#### Examples
 
 ```console
 php artisan tailwire:model Vehicle
@@ -153,10 +166,14 @@ php artisan tailwire:model Admin/Insurance
 ### Run automatic migrations
 
 ```console
-php artisan tailwire:migrate {--fresh} {--seed}
+php artisan tailwire:migrate {--fresh} {--seed} {--force}
 ```
 
-Runs automatic migrations for all of your Tailwire models which have a `migration` method. This uses Doctrine to automatically diff your database and apply the necessary changes. Optionally use `--fresh` to wipe the database, and `--seed` to run your seeders afterwards. Note that if you still want to use traditional Laravel migration files, they will run *before* Tailwire automatic migrations when using the `tailwire:migrate` command.
+Runs automatic migrations for all of your Tailwire models which have a `migration` method specified. This uses Doctrine to automatically diff your database and apply the necessary changes. 
+
+Optionally use `--fresh` to wipe the database, and `--seed` to run your seeders afterwards. If you wish to run this in production, use the `--force`.
+
+Note that if you still want to use traditional Laravel migration files, they will run *before* automatic migration methods.
 
 ## Usage
 
@@ -223,7 +240,7 @@ class Home extends Component
         return $v->section(
             $v->h1('Home')->class('text-xl px-6 py-4'),
             $v->p('You are logged in!')->class('p-6')
-        )->class('bg-white rounded-lg shadow divide-y');
+        )->class('bg-white shadow divide-y');
     }
 ```
 
@@ -254,11 +271,11 @@ $v->icon('refresh')->class('animate-spin text-gray-400 w-5 h-5 mx-auto')
 
 Specify the Tailwind classes for an element within the chained `class()` method.
 
-Now you might be thinking, "but there isn't autocomplete!" Fortunately, VSCode and PHPStorm both offer plugins which will add Tailwind autocomplete to your  Tailwire components. I personally use [TailwindCSS Autocomplete](https://plugins.jetbrains.com/plugin/13365-tailwindcss-autocomplete) for PHPStorm, which works great.
+Now you might be thinking, "but there isn't autocomplete!" Good news; I made a PHPStorm package for that: [TailwindCSS PHP Autocomplete](https://plugins.jetbrains.com/plugin/16014-tailwindcss-php-autocomplete)
 
 ### Wiring elements via Livewire
 
-Along with HTML attributes, Tailwire also allows you to wire up your elements to make them reactive via Livewire. The method names are specified according to  Livewire conventions, which can be found here: [Laravel Livewire docs](https://laravel-livewire.com/docs/2.x/quickstart)
+Along with HTML attributes, Tailwire also allows you to wire up your elements to make them reactive via Livewire. The method names are specified according to Livewire attribute conventions, which can be found here: [Laravel Livewire docs](https://laravel-livewire.com/docs/2.x/quickstart)
 
 #### Modelling data
 
@@ -334,13 +351,13 @@ function incrementCount($amount)
 }
 ```
 
-The beauty of this is that it allows you to keep all of your logic inside the Tailwire component classes themselves! No more switching between tons of files and languages and wondering how things happen.
+The beauty of this is that it allows you to keep all of your logic inside the Tailwire component classes themselves! No more switching between tons of files and languages and wondering where things happen.
 
 ### Using directives & other methods
 
 The `View $v` variable also allows you to use some handy directives inside your `view` method, such as if statements, each loops, includes, and more.
 
-If statements:
+#### If statements
 
 ```php
 $v->if(Auth::guest(),
@@ -350,7 +367,7 @@ $v->if(Auth::guest(),
 )
 ```
 
-Each loops:
+#### Each loops
 
 ```php
 $v->each(Vehicle::all(),
@@ -363,19 +380,19 @@ $v->each(Vehicle::all(),
 ),
 ```
 
-Including partial components:
+#### Including partial components
 
 ```php
 $v->include('user-list-item', $user),
 ```
 
-Heroicons ([list of available icons here](https://heroicons.com)):
+#### Heroicons ([list of available icons here](https://heroicons.com))
 
 ```php
 $v->icon('cog')->class('text-blue-600 w-5 h-5'),
 ```
 
-Swipe down to refresh indicator (for iOS PWA's):
+#### Swipe down to refresh indicator (for iOS PWA's)
 
 ```php
 $v->swipeDownRefresh(
@@ -383,7 +400,7 @@ $v->swipeDownRefresh(
 )->class('mb-4'),
 ```
 
-Infinite scrolling indicator:
+#### Infinite scrolling indicator
 
 ```php
 $v->infiniteScroll(
@@ -391,7 +408,7 @@ $v->infiniteScroll(
 )->class('mt-4'),
 ```
 
-## Guides
+## Extras
 
 ### Swipe down refresh
 
@@ -409,7 +426,7 @@ If a user has scrolled `-100px` from the top of the page, the `swipeDownRefresh`
 public function view(View $v)
 {
     return $v->section(
-        $v->h1('Vehicles')->class('text-2xl mb-2'),
+        $v->h1('Vehicles')->class('text-xl mb-2'),
 
         $v->each($this->query()->paginate($this->perPage),
             fn(Vehicle $vehicle) => $v->div(
@@ -433,3 +450,15 @@ public function query()
 ```
 
 Each Tailwire component contains a `$perPage` public property which is incremented if the hidden `infiniteScroll` element is present on the page and the user scrolls `100px` from the bottom. After it is incremented, the component should load more items and hide the `infiniteScroll` element again. See how `query()`, `paginate()`, `count()`, and `$perPage` are used in the example above.
+
+### Honeypot spam prevention
+
+```php
+$v->honey()
+```
+
+Tailwire uses [Honey](https://github.com/lukeraymonddowning/honey) for spam bot prevention. See the repo for that package for more information. You can also use recaptcha by passing `true` to the element:
+
+```php
+$v->honey(true) // use honey recaptcha (be sure to configure it!)
+```
