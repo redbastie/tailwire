@@ -39,8 +39,8 @@ class Login extends Component
                 $v->div(
                     $v->div(
                         $v->input()->type('checkbox')->id('remember')->wireModelDefer('remember')->class('border-gray-300'),
-                        $v->label('Remember')->for('remember')
-                    )->class('flex items-center space-x-2'),
+                        $v->label('Remember')->for('remember')->class('pl-2')
+                    )->class('flex items-center'),
 
                     $v->a('Forgot Password?')->href(route('password.forgot'))->class('text-blue-600')
                 )->class('flex justify-between'),
