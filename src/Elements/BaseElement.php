@@ -21,7 +21,7 @@ class BaseElement
         return view("tailwire::elements.$view", get_object_vars($this))->render();
     }
 
-    private function attribute($key, $value = null)
+    public function attribute($key, $value = null)
     {
         $this->attributes[$key] = $value ?? '';
 
