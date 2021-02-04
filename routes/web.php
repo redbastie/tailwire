@@ -8,7 +8,7 @@ Route::middleware('web')->group(function () {
 
     if ($filesystem->exists($dir = app_path('Components'))) {
         foreach ($filesystem->allFiles($dir) as $file) {
-            $namespace = 'App\\Components\\' . str_replace([DIRECTORY_SEPARATOR, '.php'], ['\\', ''], $file->getRelativePathname());
+            $namespace = 'App\\Components\\' . str_replace(['/', '.php'], ['\\', ''], $file->getRelativePathname());
             $class = app($namespace);
 
             if (property_exists($class, 'routeUri') && $class->routeUri) {
