@@ -32,7 +32,7 @@ class Index extends Component
                         $v->ul(
                             $v->li($user->name),
                             $v->li(timezone($user->created_at))->class('text-xs text-gray-500')
-                        ),
+                        )->class('flex-1'),
                         $v->div(
                             $v->button($v->icon('eye'))->wireClick('$emitTo', 'users.read', 'show', $user->id)
                                 ->class('text-blue-600 w-5 h-5'),
