@@ -23,7 +23,7 @@ trait ManagesFiles
         foreach ($this->filesystem()->allFiles(__DIR__ . '/../../resources/stubs/' . $stubFolder) as $file) {
             $filePath = Str::replaceLast('.stub', '', $this->replace($replaces, $file->getRelativePathname()));
 
-            if ($fileDir = implode('/', array_slice(explode('/', $filePath), 0, -1))) {
+            if ($fileDir = implode(DIRECTORY_SEPARATOR, array_slice(explode(DIRECTORY_SEPARATOR, $filePath), 0, -1))) {
                 $this->filesystem()->ensureDirectoryExists($fileDir);
             }
 
