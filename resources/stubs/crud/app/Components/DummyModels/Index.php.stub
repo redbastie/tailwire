@@ -33,6 +33,7 @@ class Index extends Component
                             $v->li($DummyModelVariable->name),
                             $v->li(timezone($DummyModelVariable->created_at))->class('text-xs text-gray-500')
                         )->class('flex-1'),
+
                         $v->div(
                             $v->button($v->icon('eye'))->wireClick('$emitTo', 'DummyRouteName.read', 'show', $DummyModelVariable->id)
                                 ->class('text-blue-600 w-5 h-5'),
