@@ -42,7 +42,7 @@ class Index extends Component
                             $v->button($v->icon('trash'))->wireClick('delete', $user->id)->confirm('Delete this User?')
                                 ->class('text-blue-600 w-5 h-5')
                         )->class('flex space-x-3')
-                    )->class('flex items-center justify-between px-6 py-4')
+                    )->class('flex items-center justify-between hover:bg-gray-50 px-6 py-4')
                 )->empty(
                     fn() => $v->p('No Users found.')->class('px-6 py-4')
                 )
