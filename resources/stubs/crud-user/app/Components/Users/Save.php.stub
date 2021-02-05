@@ -3,6 +3,7 @@
 namespace App\Components\Users;
 
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Redbastie\Tailwire\Component;
 use Redbastie\Tailwire\View;
 
@@ -62,7 +63,7 @@ class Save extends Component
     {
         $validated = $this->validate([
             'name' => ['required'],
-            'email' => ['required', 'email', 'unique:users,email,' . $this->user->id],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($this->user->id)],
             'password' => [$this->user->exists ? 'nullable' : 'required', 'confirmed'],
         ]);
 
