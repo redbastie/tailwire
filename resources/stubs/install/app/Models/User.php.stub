@@ -14,7 +14,7 @@ class User extends Authenticatable
     public function migration(Blueprint $table)
     {
         $table->id();
-        $table->string('name');
+        $table->string('name')->index();
         $table->string('email')->unique();
         $table->timestamp('email_verified_at')->nullable();
         $table->string('password');
