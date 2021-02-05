@@ -28,7 +28,7 @@ class Index extends Component
                 )->class('relative min-w-0'),
 
                 $v->button($v->icon('plus')->class('w-5 h-5'), 'Create')->wireClick('$emitTo', 'DummyRouteName.save', 'show')
-                    ->class('flex flex-shrink-0 items-center text-white bg-blue-600 rounded-lg px-3 py-2')
+                    ->class('flex items-center text-white bg-blue-600 rounded-lg px-3 py-2')
             )->class('flex justify-between space-x-4 mb-4'),
 
             $v->div(
