@@ -20,7 +20,7 @@ class DummyComponent extends Component
 
             $v->div(
                 $v->input()->type('search')->placeholder('Search DummyModelTitles')->wireModelDebounce('search')
-                    ->class('border-gray-300 min-w-0')
+                    ->class('border-gray-300 rounded-lg min-w-0')
             )->class('flex justify-between space-x-4 mb-4'),
 
             $v->div(
@@ -34,7 +34,7 @@ class DummyComponent extends Component
                 )->empty(
                     fn() => $v->p('No DummyModelTitles found.')->class('px-6 py-4')
                 )
-            )->class('bg-white shadow divide-y'),
+            )->class('bg-white rounded-lg shadow divide-y overflow-hidden'),
 
             $v->if($this->query()->count() > $this->perPage,
                 fn() => $v->infiniteScroll(
