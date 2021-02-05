@@ -20,10 +20,11 @@ class DummyComponent extends Component
 
             $v->div(
                 $v->div(
-                    $v->icon('search')->class('absolute left-3 inset-y-0 pointer-events-none text-gray-400 w-4 h-4 my-auto'),
-                    $v->input()->type('search')->placeholder('Search DummyModelTitles')->wireModelDebounce('search')
+                    $v->icon('search')
+                        ->class('absolute left-3 inset-y-0 pointer-events-none text-gray-400 w-4 h-4 my-auto'),
+                    $v->input()->type('search')->placeholder('Search')->wireModelDebounce('search')
                         ->class('placeholder-gray-400 border-gray-300 rounded-lg max-w-full pl-9')
-                )->class('relative min-w-0'),
+                )->class('relative min-w-0')
             )->class('flex justify-between space-x-4 mb-4'),
 
             $v->div(
@@ -32,8 +33,8 @@ class DummyComponent extends Component
                         $v->ul(
                             $v->li($DummyModelVariable->name),
                             $v->li(timezone($DummyModelVariable->created_at))->class('text-xs text-gray-500')
-                        )
-                    )->class('flex items-center hover:bg-gray-50 space-x-6 px-6 py-4')
+                        )->class('md:flex-1')
+                    )->class('md:flex items-center hover:bg-gray-50 space-y-4 md:space-y-0 md:space-x-6 px-6 py-4')
                 )->empty(
                     fn() => $v->p('No DummyModelTitles found.')->class('px-6 py-4')
                 )

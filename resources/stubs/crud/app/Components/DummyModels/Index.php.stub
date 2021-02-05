@@ -21,12 +21,14 @@ class Index extends Component
 
             $v->div(
                 $v->div(
-                    $v->icon('search')->class('absolute left-3 inset-y-0 pointer-events-none text-gray-400 w-4 h-4 my-auto'),
-                    $v->input()->type('search')->placeholder('Search DummyModelTitles')->wireModelDebounce('search')
+                    $v->icon('search')
+                        ->class('absolute left-3 inset-y-0 pointer-events-none text-gray-400 w-4 h-4 my-auto'),
+                    $v->input()->type('search')->placeholder('Search')->wireModelDebounce('search')
                         ->class('placeholder-gray-400 border-gray-300 rounded-lg max-w-full pl-9')
                 )->class('relative min-w-0'),
-                $v->button('Create')->wireClick('$emitTo', 'DummyRouteName.save', 'show')
-                    ->class('text-white bg-blue-600 rounded-lg px-3 py-2')
+
+                $v->button($v->icon('plus')->class('w-5 h-5'), 'Create')->wireClick('$emitTo', 'DummyRouteName.save', 'show')
+                    ->class('flex flex-shrink-0 items-center text-white bg-blue-600 rounded-lg px-3 py-2')
             )->class('flex justify-between space-x-4 mb-4'),
 
             $v->div(
@@ -35,7 +37,7 @@ class Index extends Component
                         $v->ul(
                             $v->li($DummyModelVariable->name),
                             $v->li(timezone($DummyModelVariable->created_at))->class('text-xs text-gray-500')
-                        )->class('flex-grow'),
+                        )->class('md:flex-1'),
 
                         $v->div(
                             $v->button($v->icon('eye'))->wireClick('$emitTo', 'DummyRouteName.read', 'show', $DummyModelVariable->id)
@@ -45,7 +47,7 @@ class Index extends Component
                             $v->button($v->icon('trash'))->wireClick('delete', $DummyModelVariable->id)->confirm('Delete this DummyModelTitle?')
                                 ->class('text-blue-600 w-5 h-5')
                         )->class('flex space-x-3')
-                    )->class('flex items-center hover:bg-gray-50 space-x-6 px-6 py-4')
+                    )->class('md:flex items-center hover:bg-gray-50 space-y-4 md:space-y-0 md:space-x-6 px-6 py-4')
                 )->empty(
                     fn() => $v->p('No DummyModelTitles found.')->class('px-6 py-4')
                 )
