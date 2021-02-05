@@ -65,6 +65,7 @@ class Index extends Component
 
         if ($this->model('search')) {
             $query->where('name', 'like', '%' . $this->model('search') . '%');
+            $query->orWhere('email', 'like', '%' . $this->model('search') . '%');
         }
 
         return $query->orderBy('name');
