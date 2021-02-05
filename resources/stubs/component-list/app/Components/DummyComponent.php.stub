@@ -20,7 +20,7 @@ class DummyComponent extends Component
 
             $v->div(
                 $v->div(
-                    $v->icon('search')->class('absolute top-3 left-3 pointer-events-none text-gray-400 w-4 h-4'),
+                    $v->icon('search')->class('absolute left-3 inset-y-0 pointer-events-none text-gray-400 w-4 h-4 my-auto'),
                     $v->input()->type('search')->placeholder('Search DummyModelTitles')->wireModelDebounce('search')
                         ->class('placeholder-gray-400 border-gray-300 rounded-lg max-w-full pl-9')
                 )->class('relative min-w-0'),
