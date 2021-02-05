@@ -31,7 +31,7 @@ class Index extends Component
                     fn(User $user) => $v->div(
                         $v->ul(
                             $v->li($user->name),
-                            $v->li(timezone($user->created_at))->class('text-xs text-gray-500')
+                            $v->li($user->email)->class('text-xs text-gray-500')
                         ),
 
                         $v->div(
