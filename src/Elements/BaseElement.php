@@ -42,9 +42,9 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function contenteditable()
+    public function contenteditable($value = true)
     {
-        return $this->attribute(__FUNCTION__, 'true');
+        return $value ? $this->attribute(__FUNCTION__, 'true') : $this;
     }
 
     public function dir($value)
@@ -52,9 +52,9 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function draggable()
+    public function draggable($value = true)
     {
-        return $this->attribute(__FUNCTION__, 'true');
+        return $value ? $this->attribute(__FUNCTION__, 'true') : $this;
     }
 
     public function id($value)
@@ -67,9 +67,9 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function spellcheck()
+    public function spellcheck($value = true)
     {
-        return $this->attribute(__FUNCTION__, 'true');
+        return $value ? $this->attribute(__FUNCTION__, 'true') : $this;
     }
 
     public function tabindex($value)
@@ -116,19 +116,19 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function autofocus()
+    public function autofocus($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
-    public function autoplay()
+    public function autoplay($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
-    public function checked()
+    public function checked($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function cite($value)
@@ -146,9 +146,9 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function controls()
+    public function controls($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function coords($value)
@@ -166,9 +166,9 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function default()
+    public function default($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function dirname($value)
@@ -176,14 +176,14 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function disabled()
+    public function disabled($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
-    public function download()
+    public function download($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function enctype($value)
@@ -231,9 +231,9 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function ismap($value)
+    public function ismap($value = true)
     {
-        return $this->attribute(__FUNCTION__, $value);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function kind($value)
@@ -251,9 +251,9 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function loop()
+    public function loop($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function low($value)
@@ -286,14 +286,14 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function multiple()
+    public function multiple($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
-    public function muted()
+    public function muted($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function name($value)
@@ -301,14 +301,14 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function novalidate()
+    public function novalidate($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
-    public function open()
+    public function open($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function optimum($value)
@@ -336,9 +336,9 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function readonly()
+    public function readonly($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function rel($value)
@@ -346,14 +346,14 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function required()
+    public function required($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
-    public function reversed()
+    public function reversed($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function rows($value)
@@ -366,9 +366,9 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function sandbox()
+    public function sandbox($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function scope($value)
@@ -376,9 +376,9 @@ class BaseElement
         return $this->attribute(__FUNCTION__, $value);
     }
 
-    public function selected()
+    public function selected($value = true)
     {
-        return $this->attribute(__FUNCTION__);
+        return $value ? $this->attribute(__FUNCTION__) : $this;
     }
 
     public function shape($value)
