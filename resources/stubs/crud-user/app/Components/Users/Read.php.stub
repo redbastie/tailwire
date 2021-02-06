@@ -37,13 +37,13 @@ class Read extends Component
                         ),
 
                         $v->dl(
-                            $v->dt('Email Verified At')->class('text-xs text-gray-500'),
-                            $v->dd(timezone($this->user->email_verified_at))
+                            $v->dt('Timezone')->class('text-xs text-gray-500'),
+                            $v->dd($this->user->timezone ?? 'Empty')
                         ),
 
                         $v->dl(
-                            $v->dt('Timezone')->class('text-xs text-gray-500'),
-                            $v->dd($this->user->timezone ?? 'Empty')
+                            $v->dt('Email Verified At')->class('text-xs text-gray-500'),
+                            $v->dd(timezone($this->user->email_verified_at))
                         ),
 
                         $v->dl(
