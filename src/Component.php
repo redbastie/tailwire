@@ -5,11 +5,12 @@ namespace Redbastie\Tailwire;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Livewire\LivewireManager;
+use Livewire\WithFileUploads;
 use Lukeraymonddowning\Honey\Traits\WithHoney;
 
 class Component extends \Livewire\Component
 {
-    use WithHoney;
+    use WithFileUploads, WithHoney;
 
     public $routeUri, $routeName, $routeMiddleware, $routeDomain, $routeWhere;
     public $viewTitle, $viewExtends;
