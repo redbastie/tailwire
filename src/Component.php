@@ -16,6 +16,7 @@ class Component extends \Livewire\Component
     public $viewTitle, $viewExtends;
     public $model = [];
     public $perPage = 15;
+    public $perPageIncrement = 15;
     public $show = false;
     protected $listeners = ['$refresh', 'infiniteScroll', 'show'];
 
@@ -62,12 +63,12 @@ class Component extends \Livewire\Component
 
     public function updatedModelSearch()
     {
-        $this->perPage = 15;
+        $this->perPage = $this->perPageIncrement;
     }
 
     public function infiniteScroll()
     {
-        $this->perPage += 15;
+        $this->perPage += $this->perPageIncrement;
     }
 
     public function toggleShow()
