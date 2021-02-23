@@ -28,20 +28,22 @@ class DummyComponent extends Component
             )->class('flex justify-between space-x-4 mb-4'),
 
             $v->div(
-                $v->each($this->query()->paginate($this->perPage),
-                    fn(DummyModel $DummyModelVariable) => $v->div(
+                $v->each(
+                    $this->query()->paginate($this->perPage),
+                    fn (DummyModel $DummyModelVariable) => $v->div(
                         $v->ul(
                             $v->li($DummyModelVariable->name),
                             $v->li(timezone($DummyModelVariable->created_at))->class('text-xs text-gray-500')
                         )->class('md:flex-1')
                     )->class('md:flex items-center hover:bg-gray-50 space-y-4 md:space-y-0 md:space-x-6 px-6 py-4')
                 )->empty(
-                    fn() => $v->p('No DummyModelTitles found.')->class('px-6 py-4')
+                    fn () => $v->p('No DummyModelTitles found.')->class('px-6 py-4')
                 )
             )->class('bg-white rounded-lg shadow divide-y overflow-hidden'),
 
-            $v->if($this->query()->count() > $this->perPage,
-                fn() => $v->infiniteScroll(
+            $v->if(
+                $this->query()->count() > $this->perPage,
+                fn () => $v->infiniteScroll(
                     $v->icon('refresh')->class('animate-spin text-gray-400 w-5 h-5 mx-auto')
                 )->class('mt-4')
             )

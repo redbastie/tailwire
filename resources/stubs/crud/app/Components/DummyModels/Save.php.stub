@@ -12,8 +12,9 @@ class Save extends Component
 
     public function view(View $v)
     {
-        return $v->if($this->show,
-            fn() => $v->section(
+        return $v->if(
+            $this->show,
+            fn () => $v->section(
                 $v->form(
                     $v->div(
                         $v->h1($this->viewTitle)->class('text-xl'),
@@ -25,7 +26,7 @@ class Save extends Component
                             $v->label('Name')->for('name'),
                             $v->input()->id('name')->wireModelDefer('name')
                                 ->class(($this->error('name') ? 'border-red-500' : 'border-gray-300') . ' rounded-lg w-full'),
-                            $v->if($this->error('name'), fn() => $v->p($this->error('name'))->class('text-xs text-red-600'))
+                            $v->if($this->error('name'), fn () => $v->p($this->error('name'))->class('text-xs text-red-600'))
                         )->class('space-y-1'),
                     )->class('space-y-4 p-6'),
 
@@ -46,8 +47,7 @@ class Save extends Component
 
         if ($this->DummyModelVariable->exists) {
             $this->DummyModelVariable->update($validated);
-        }
-        else {
+        } else {
             DummyModel::create($validated);
         }
 

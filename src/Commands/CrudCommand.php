@@ -20,8 +20,7 @@ class CrudCommand extends Command
 
             $this->warn('<info>User</info> CRUD components & views generated! ' .
                 '<href=' . url('users') . '>' . url('users') . '</>');
-        }
-        else {
+        } else {
             $modelParser = new ComponentParser('App\\Models', resource_path('views'), $this->argument('class'));
             $modelTitles = Str::plural(preg_replace('/(.)(?=[A-Z])/u', '$1 ', $modelParser->className()));
             $componentClass = Str::replaceLast($modelParser->className(), Str::studly($modelTitles), $this->argument('class'));

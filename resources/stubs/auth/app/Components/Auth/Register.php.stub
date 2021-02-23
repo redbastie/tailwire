@@ -26,21 +26,21 @@ class Register extends Component
                     $v->label('Name')->for('name'),
                     $v->input()->id('name')->wireModelDefer('name')
                         ->class(($this->error('name') ? 'border-red-500' : 'border-gray-300') . ' rounded-lg w-full'),
-                    $v->if($this->error('name'), fn() => $v->p($this->error('name'))->class('text-xs text-red-600'))
+                    $v->if($this->error('name'), fn () => $v->p($this->error('name'))->class('text-xs text-red-600'))
                 )->class('space-y-1'),
 
                 $v->div(
                     $v->label('Email')->for('email'),
                     $v->input()->type('email')->id('email')->wireModelDefer('email')
                         ->class(($this->error('email') ? 'border-red-500' : 'border-gray-300') . ' rounded-lg w-full'),
-                    $v->if($this->error('email'), fn() => $v->p($this->error('email'))->class('text-xs text-red-600'))
+                    $v->if($this->error('email'), fn () => $v->p($this->error('email'))->class('text-xs text-red-600'))
                 )->class('space-y-1'),
 
                 $v->div(
                     $v->label('Password')->for('password'),
                     $v->input()->type('password')->id('password')->wireModelDefer('password')
                         ->class(($this->error('password') ? 'border-red-500' : 'border-gray-300') . ' rounded-lg w-full'),
-                    $v->if($this->error('password'), fn() => $v->p($this->error('password'))->class('text-xs text-red-600'))
+                    $v->if($this->error('password'), fn () => $v->p($this->error('password'))->class('text-xs text-red-600'))
                 )->class('space-y-1'),
 
                 $v->div(

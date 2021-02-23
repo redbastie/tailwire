@@ -1,1 +1,1 @@
-<x-honey/>
+<x-honey />

@@ -23,16 +23,18 @@ class App extends Component
                     $v->span(config('app.name'))->class('text-xl')
                 )->href(route('index'))->class('flex items-center space-x-1.5'),
 
-                $v->if(Route::has('login'),
-                    fn() => $v->if(Auth::guest(),
-                        fn() => $v->nav(
+                $v->if(
+                    Route::has('login'),
+                    fn () => $v->if(
+                        Auth::guest(),
+                        fn () => $v->nav(
                             $v->a('Login')->href(route('login'))
                                 ->class(Request::is('login') ? 'text-blue-600' : 'text-gray-500'),
                             $v->a('Register')->href(route('register'))
                                 ->class(Request::is('register') ? 'text-blue-600' : 'text-gray-500'),
                         )->class('flex space-x-4')
                     )->else(
-                        fn() => $v->nav(
+                        fn () => $v->nav(
                             $v->a('Home')->href(route('home'))
                                 ->class(Request::is('home') ? 'text-blue-600' : 'text-gray-500'),
                             $v->a('Logout')->href(route('logout'))

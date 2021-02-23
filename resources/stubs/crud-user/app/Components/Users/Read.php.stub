@@ -12,8 +12,9 @@ class Read extends Component
 
     public function view(View $v)
     {
-        return $v->if($this->show,
-            fn() => $v->section(
+        return $v->if(
+            $this->show,
+            fn () => $v->section(
                 $v->div(
                     $v->div(
                         $v->h1('User')->class('text-xl'),

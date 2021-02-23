@@ -32,8 +32,7 @@ class Component extends \Livewire\Component
         if ($this->viewExtends) {
             $component = app((new LivewireManager)->getClass($this->viewExtends));
             $view->yield = $this->view($view);
-        }
-        else {
+        } else {
             $component = $this;
         }
 

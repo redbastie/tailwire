@@ -52,8 +52,7 @@ class MigrateCommand extends Command
                         }
 
                         Schema::drop($tempTable);
-                    }
-                    else {
+                    } else {
                         Schema::create($class->getTable(), function (Blueprint $table) use ($class) {
                             $class->migration($table);
                         });
