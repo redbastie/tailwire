@@ -271,7 +271,13 @@ $v->icon('refresh')->class('animate-spin text-gray-400 w-5 h-5 mx-auto')
 
 Specify the Tailwind classes for an element within the chained `class()` method.
 
-Now you might be thinking, "but there isn't autocomplete!" Good news; I made a PHPStorm package for that: [TailwindCSS PHP Autocomplete](https://plugins.jetbrains.com/plugin/16014-tailwindcss-php-autocomplete)
+Now you might be thinking, "but there isn't autocomplete!" Good news; install the VSCode extension "Tailwind CSS Intellisense", then add the following to your `settings.json`:
+
+```json
+"tailwindCSS.experimental.classRegex": [
+    "class\\('([^']*)'\\)"
+],
+```
 
 ### Wiring elements via Livewire
 
