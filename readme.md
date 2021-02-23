@@ -275,7 +275,7 @@ Now you might be thinking, "but there isn't autocomplete!" Good news; install th
 
 ```json
 "tailwindCSS.experimental.classRegex": [
-    "class\\('([^']*)'\\)"
+    "class\\([\"']([^\"']*)[\"']\\)"
 ],
 ```
 
