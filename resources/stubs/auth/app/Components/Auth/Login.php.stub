@@ -63,13 +63,13 @@ class Login extends Component
                 'seconds' => RateLimiter::availableIn($this->throttleKey()),
             ]));
 
-            return null;
+            return;
         } else if (!Auth::attempt($validated, $this->model('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             $this->addError('email', trans('auth.failed'));
 
-            return null;
+            return;
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);
