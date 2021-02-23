@@ -15,8 +15,8 @@ class Component extends \Livewire\Component
     public $routeUri, $routeName, $routeMiddleware, $routeDomain, $routeWhere;
     public $viewTitle, $viewExtends;
     public $model = [];
-    public $perPage = 15;
-    public $perPageIncrement = 15;
+    public $perPage = 20;
+    public $perPageIncrement = 20;
     public $show = false;
     protected $listeners = ['$refresh', 'infiniteScroll', 'show'];
 
