@@ -1,4 +1,10 @@
-![Tailwire](https://i.imgur.com/1U0BcXD.png)
+# No Longer Maintained
+
+Please check out my new package here: https://github.com/bastinald/malzahar
+
+It's a much better implementation of what this package was trying to do.
+
+
 
 # Tailwire
 
